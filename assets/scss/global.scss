@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "assets/scss/variable.module.scss";
+
+.g-container {
+  max-width: 1920px;
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  @media (min-width: 640px) {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  @media (min-width: 768px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  @media (min-width: 1024px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+  @media (min-width: 1280px) {
+    padding-left: 120px;
+    padding-right: 120px;
+  }
+  @media (min-width: 1536px) {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}

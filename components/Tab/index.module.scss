@@ -1,0 +1,33 @@
+@import "assets/scss/variable.module.scss";
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: auto;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border-bottom: 3px solid transparent;
+  &:focus {
+    outline: none;
+  }
+  font-size: 24px;
+  font-weight: 700;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.activeTab {
+  border-bottom: 3px solid $blue-light-color;
+  color: $blue-light-color;
+}
