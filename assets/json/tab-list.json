@@ -1,4 +1,5 @@
 [
   { "id": 0, "label": "Project", "value": "Project" },
-  { "id": 1, "label": "Contribution", "value": "Contribution" }
+  { "id": 1, "label": "Contribution", "value": "Contribution" },
+  { "id": 2, "label": "Release", "value": "Release" }
 ]

@@ -8,6 +8,7 @@ import WalletButton from "components/Button/WalletButton";
 import Tab from "components/Tab";
 import ProjectSection from "components/ProjectSection";
 import ContributionSection from "components/ContributionSection";
+import ReleaseSection from "components/ReleaseSection";
 
 // json
 import TabList from "assets/json/tab-list.json";
@@ -54,6 +55,7 @@ const Home = () => {
           <Tab tabList={tabList} onChange={(item) => handleSelectedTab(item)} />
           {activeTab === 0 && <ProjectSection />}
           {activeTab === 1 && <ContributionSection />}
+          {activeTab === 2 && <ReleaseSection />}
         </div>
       </main>
     </div>

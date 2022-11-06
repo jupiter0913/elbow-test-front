@@ -27,7 +27,7 @@ const ProjectSection = () => {
               onChange={(value) => setProjectName(value)}
             />
           </div>
-          <div className="w-full flex gap-[30px]">
+          <div className="w-full flex gap-8">
             <div>
               <Input
                 value={raiseAmount}
