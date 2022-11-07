@@ -15,8 +15,26 @@ import Crowdfund from "assets/abis/Crowdfund.json";
 // styles
 import styles from "./index.module.scss";
 
-const ReleaseSection = () => {
-  const [selectedProject, setSelectedProject] = useState(ProjectList[0]);
+const ReleaseSection = (props) => {
+  const { projectInfo } = props;
+  const [projectList, setProjectList] = useState([]);
+  const [selectedProject, setSelectedProject] = useState({});
+
+  useEffect(() => {
+    if (projectInfo.length !== 0) {
+      let array = [];
+      projectInfo.map((item, index) => {
+        let object = {};
+        object.id = Number(item[0]);
+        object.label = item[2];
+        object.value = item[2];
+        array.push(object);
+      });
+      setSelectedProject(array[0]);
+      setProjectList(array);
+    }
+  }, [projectInfo]);
+
   const [releaseAmount, setReleaseAmount] = useState(0);
   const [releaseAddress, setReleaseAddress] = useState("");
 
@@ -45,15 +63,17 @@ const ReleaseSection = () => {
 
   return (
     <div className={styles.container}>
-      <div className="w-full flex gap-[100px]">
+      <div className="w-full flex gap-[100px] items-center">
         <div className="flex flex-1 flex-wrap gap-4">
           <div className="w-full flex gap-8">
             <div className="w-full flex flex-1">
-              <Select
-                data={ProjectList}
-                selected={selectedProject}
-                onChange={(item) => setSelectedProject(item)}
-              />
+              {projectList.length !== 0 && (
+                <Select
+                  data={projectList}
+                  selected={selectedProject}
+                  onChange={(item) => setSelectedProject(item)}
+                />
+              )}
             </div>
             <div className="w-full flex flex-1">
               <Input

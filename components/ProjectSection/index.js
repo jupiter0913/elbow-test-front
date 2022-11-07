@@ -31,15 +31,7 @@ const ProjectSection = () => {
       );
     };
     fetchContract();
-
-    fetchProjects();
   }, [connected, signer]);
-
-  useEffect(() => {
-    if (!tokenContract) return;
-    const fetchContractInfo = async () => {};
-    fetchContractInfo();
-  }, [tokenContract]);
 
   const handleCreateProject = async () => {
     if (!tokenContract) return;
@@ -53,34 +45,22 @@ const ProjectSection = () => {
     ).wait();
   };
 
-  const handleCreateContribution = async () => {
-    if (!tokenContract) return;
-    console.log(selectedToken.address);
-    await (
-      await tokenContract.createProject(1, raiseAmount * pow(10, 18))
-    ).wait();
-  };
-
-  const fetchProjects = async () => {
-    if (!tokenContract) return;
-    const projectCount = Number(await tokenContract.projectCount());
-    console.log(projectCount);
-
-    for (let i = 1; i <= projectCount; i++) {
-      const projectInfo = await tokenContract.getProject(i);
-      console.log(projectInfo);
-    }
-  };
-
   return (
     <div className={styles.container}>
-      <div className="w-full flex gap-[100px]">
+      <div className="w-full flex gap-[100px] items-center">
         <div className="flex flex-1 flex-wrap gap-4">
           <div className="w-full">
             <Input
               value={projectName}
               placeholder="Project Name"
               onChange={(value) => setProjectName(value)}
+            />
+          </div>
+          <div className="w-full">
+            <Input
+              value={projectDescription}
+              placeholder="Project Description"
+              onChange={(value) => setProjectDescription(value)}
             />
           </div>
           <div className="w-full flex gap-8">

@@ -2,22 +2,38 @@ import { useEffect, useContext, useState } from "react";
 
 // custom components
 import Button from "components/Button";
-import Input from "components/Input";
 import Select from "components/Select";
 
 import { Web3ModalContext } from "contexts/Web3ModalProvider";
 import { getContract } from "utils";
 
 // json
-import ProjectList from "assets/json/project-list.json";
 import Crowdfund from "assets/abis/Crowdfund.json";
 import MockUSDC from "assets/abis/MockUSDC.json";
 
 // styles
 import styles from "./index.module.scss";
 
-const ContributionSection = () => {
-  const [selectedProject, setSelectedProject] = useState(ProjectList[0]);
+const ContributionSection = (props) => {
+  const { projectInfo } = props;
+  const [projectList, setProjectList] = useState([]);
+  const [selectedProject, setSelectedProject] = useState({});
+
+  useEffect(() => {
+    if (projectInfo.length !== 0) {
+      let array = [];
+      projectInfo.map((item, index) => {
+        let object = {};
+        object.id = Number(item[0]);
+        object.label = item[2];
+        object.value = item[2];
+        array.push(object);
+      });
+      setSelectedProject(array[0]);
+      setProjectList(array);
+    }
+  }, [projectInfo]);
+
   const [selectedAmount, setSelectedAmount] = useState(0);
 
   const [allowance, setAllowance] = useState(0);
@@ -73,15 +89,18 @@ const ContributionSection = () => {
 
   return (
     <div className={styles.container}>
-      <div className="w-full flex gap-[100px]">
+      <div className="w-full flex gap-[100px] items-center">
         <div className="flex flex-1 flex-wrap gap-4">
           <div className="w-full">
-            <Select
-              data={ProjectList}
-              selected={selectedProject}
-              onChange={(item) => setSelectedProject(item)}
-            />
+            {projectList.length !== 0 && (
+              <Select
+                data={projectList}
+                selected={selectedProject}
+                onChange={(item) => setSelectedProject(item)}
+              />
+            )}
           </div>
+          <div className="w-full">Contribution Amount: {selectedAmount}</div>
           <div className="w-full flex gap-4">
             <Button
               label="100"
