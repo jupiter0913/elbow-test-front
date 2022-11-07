@@ -105,7 +105,7 @@ const Home = () => {
               <th className="text-left">Project Name</th>
               <th className="text-left">Creator (Wallet Address)</th>
               <th className="text-left">Token</th>
-              <th className="text-left">Amount</th>
+              <th className="text-left">Amount (Raise/Release)</th>
             </tr>
           </thead>
           <tbody>
