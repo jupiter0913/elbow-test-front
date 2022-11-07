@@ -25,9 +25,9 @@ const ReleaseSection = (props) => {
       let array = [];
       projectInfo.map((item, index) => {
         let object = {};
-        object.id = Number(item[0]);
-        object.label = item[2];
-        object.value = item[2];
+        object.id = Number(item.data[0]);
+        object.label = item.data[2];
+        object.value = item.data[2];
         array.push(object);
       });
       setSelectedProject(array[0]);
