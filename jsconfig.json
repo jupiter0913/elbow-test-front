@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "."
-  }
+  },
+  "include": [".", "next-env.d.js", "**/*.js"],
+  "exclude": ["node_modules"]
 }
