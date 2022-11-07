@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 
 // next components
 import Head from "next/head";
@@ -20,7 +20,6 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const [tabList, setTabList] = useState(TabList);
-
   useEffect(() => {
     let array = [];
     TabList.map((item) => {

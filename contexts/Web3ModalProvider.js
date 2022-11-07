@@ -8,8 +8,8 @@ import { ChainId, ChainUrl } from "constants/chains";
 import { toast } from "react-toastify";
 
 let EthereumChainId =
-  process.env.REACT_APP_ENV === "development"
-    ? ChainId.Rinkeby
+  process.env.NEXT_PUBLIC_ENV === "development"
+    ? ChainId.goerli
     : ChainId.Ethereum;
 
 export const Web3ModalContext = createContext({

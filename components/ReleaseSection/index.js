@@ -1,20 +1,47 @@
-import { useState } from "react";
+import { useEffect, useContext, useState } from "react";
 
 // custom components
 import Button from "components/Button";
 import Input from "components/Input";
 import Select from "components/Select";
 
+import { Web3ModalContext } from "contexts/Web3ModalProvider";
+import { getContract } from "utils";
+
 // json
 import ProjectList from "assets/json/project-list.json";
+import Crowdfund from "assets/abis/Crowdfund.json";
 
 // styles
 import styles from "./index.module.scss";
 
 const ReleaseSection = () => {
   const [selectedProject, setSelectedProject] = useState(ProjectList[0]);
-  const [raiseAmount, setRaiseAmount] = useState(0);
-  const [projectName, setProjectName] = useState("");
+  const [releaseAmount, setReleaseAmount] = useState(0);
+  const [releaseAddress, setReleaseAddress] = useState("");
+
+  const { account, connected, signer } = useContext(Web3ModalContext);
+  const [tokenContract, setTokenContract] = useState();
+
+  useEffect(() => {
+    if (!connected || !signer) return;
+    const fetchContract = async () => {
+      setTokenContract(
+        await getContract(Crowdfund.address, Crowdfund.abi, signer)
+      );
+    };
+    fetchContract();
+  }, [connected, signer]);
+
+  const handleRelaseFund = async () => {
+    await (
+      await tokenContract.releaseFund(
+        selectedProject.id,
+        Number(releaseAmount * Math.pow(10, 18)).toString(),
+        releaseAddress
+      )
+    ).wait();
+  };
 
   return (
     <div className={styles.container}>
@@ -30,24 +57,24 @@ const ReleaseSection = () => {
             </div>
             <div className="w-full flex flex-1">
               <Input
-                value={raiseAmount}
-                placeholder="Raise Amount"
+                value={releaseAmount}
+                placeholder="Release Amount"
                 onChange={(value) => {
-                  setRaiseAmount(value);
+                  setReleaseAmount(value);
                 }}
               />
             </div>
           </div>
           <div className="w-full">
             <Input
-              value={projectName}
-              placeholder="Project Name"
-              onChange={(value) => setProjectName(value)}
+              value={releaseAddress}
+              placeholder="Release Address"
+              onChange={(value) => setReleaseAddress(value)}
             />
           </div>
         </div>
         <div>
-          <Button label="Approve & Release" onClick={() => {}} />
+          <Button label="Release" onClick={handleRelaseFund} />
         </div>
       </div>
     </div>

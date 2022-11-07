@@ -1,4 +1,8 @@
 [
-  { "id": 0, "label": "Ether", "value": "Ether" },
-  { "id": 1, "label": "Sol", "value": "Sol" }
+  {
+    "id": 0,
+    "label": "USDC",
+    "value": "USDC",
+    "address": "0x762c70c975051E8b601Ff490BC8cd17472c1995D"
+  }
 ]
